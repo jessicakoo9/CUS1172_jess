@@ -76,7 +76,7 @@
       <tbody>
         <tr>
           <td>2024–Present</td>
-          <td>Example University</td>
+          <td>St. Johns university</td>
           <td>B.S. Computer Science</td>
         </tr>
       </tbody>
