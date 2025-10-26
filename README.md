@@ -4,7 +4,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Jess' Profile Page</title>
 
- 
+
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 
@@ -18,8 +18,14 @@
       text-align: center;
       color: rgba(237, 137, 179, 0.8);
     }
+    .completed {
+      text-decoration: line-through;
+      opacity: 0.75;
+    }
   </style>
 </head>
+
+
 <body>
 
   
@@ -42,6 +48,7 @@
       </ul>
     </div>
   </nav>
+
 
  
   <div id="profile" class="container my-5">
@@ -76,37 +83,59 @@
       <tbody>
         <tr>
           <td>2024–Present</td>
-          <td>St. Johns university</td>
+          <td>St. Johns University</td>
           <td>B.S. Computer Science</td>
         </tr>
       </tbody>
     </table>
-  </div>
+  </div>  
+
+  
+      
+ 
+    <h1>Profile</h1>
+
+    
+    <div class="container my-4">
+      <form id="taskForm" class="form-inline">
+        <input id="taskTitle" class="form-control mr-2" type="text" placeholder="Task title" required>
+        <select id="taskPriority" class="form-control mr-2">
+          <option value="low">Low</option>
+          <option value="medium" selected>Medium</option>
+          <option value="high">High</option>
+        </select>
+
+        <div class="form-check form-check-inline mr-2">
+          <input class="form-check-input" type="radio" name="taskStatus" id="statusPending" value="pending" checked>
+          <label class="form-check-label" for="statusPending">Pending</label>
+        </div>
+        <div class="form-check form-check-inline mr-2">
+          <input class="form-check-input" type="radio" name="taskStatus" id="statusInProgress" value="in progress">
+          <label class="form-check-label" for="statusInProgress">In Progress</label>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Add Task</button>
+      </form>
+
+      <ul id="taskList" class="list-group mt-3"></ul>
+    </div>
 
 
-  <div id="experience" class="container my-5">
-    <h1>Work Experience</h1>
-    <div class="card-deck">
-      <div class="card shadow-sm">
-        <div class="card-body">
-          <h5 class="card-title">Digital Marketing & UX Designer</h5>
-          <p class="card-text">Plastic Surgery Office</p>
-        </div>
+    <div class="row">
+      <div class="col-md-6">
+        <p><strong>Name:</strong> Jessica Koo</p>
+        <p><strong>Major:</strong> Computer Science | <strong>Minor:</strong> Data Science</p>
       </div>
-      <div class="card shadow-sm">
-        <div class="card-body">
-          <h5 class="card-title">Research Assistant</h5>
-          <p class="card-text">CS Department</p>
-        </div>
-      </div>
-      <div class="card shadow-sm">
-        <div class="card-body">
-          <h5 class="card-title">Course Projects</h5>
-          <p class="card-text">Java OOP, React website</p>
-        </div>
+      <div class="col-md-6 text-center">
+        <img src="IMG_0583.JPG" class="img-fluid rounded shadow-sm mb-3" width="200">
+        <video class="w-100 shadow-sm" controls>
+        </video>
       </div>
     </div>
-  </div>
+
+
+<script src="js/project02.js" defer></script>
+
 
   <!-- Skills -->
   <div id="skills" class="container my-5">
@@ -168,4 +197,5 @@
     </form>
   </div>
 </body>
+<script src="js/project02.js"></script>
 </html>
