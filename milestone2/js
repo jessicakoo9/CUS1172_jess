@@ -1,0 +1,140 @@
+window.addEventListener('DOMContentLoaded', () => {
+
+  const STORAGE_KEY = 'project02_tasks';
+
+
+  const form = document.getElementById('taskForm');
+  const titleEl = document.getElementById('taskTitle');
+  const priorityEl = document.getElementById('taskPriority');
+  const taskList = document.getElementById('taskList');
+
+
+  const save = () => localStorage.setItem(STORAGE_KEY, JSON.stringify(tasks));
+  const load = () => {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      return raw ? JSON.parse(raw) : [];
+    } catch {
+      return [];
+    }
+  };
+
+  const genId = () => Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
+
+  function createTaskLI(task) {
+    const li = document.createElement('li');
+    li.className = 'list-group-item d-flex justify-content-between align-items-start';
+    li.dataset.id = task.id;
+
+  
+    const info = document.createElement('div');
+
+    const title = document.createElement('span');
+    title.textContent = task.title + ' ';
+    if (task.status === 'completed') title.classList.add('completed');
+
+    const badge = document.createElement('span');
+    badge.textContent = task.priority;
+    badge.className = 'badge ml-2 ' + (
+      task.priority === 'high'
+        ? 'badge-danger'
+        : task.priority === 'medium'
+        ? 'badge-warning'
+        : 'badge-secondary'
+    );
+
+    const status = document.createElement('small');
+    status.className = 'text-muted d-block';
+    status.textContent = `Status: ${task.status}`;
+
+    info.appendChild(title);
+    info.appendChild(badge);
+    info.appendChild(status);
+
+    
+    const btns = document.createElement('div');
+
+    const completeBtn = document.createElement('button');
+    completeBtn.className = 'btn btn-sm btn-success mr-2';
+    completeBtn.dataset.action = 'complete';
+    completeBtn.textContent = 'Mark Complete';
+
+    const removeBtn = document.createElement('button');
+    removeBtn.className = 'btn btn-sm btn-outline-danger';
+    removeBtn.dataset.action = 'remove';
+    removeBtn.textContent = 'Remove';
+
+    btns.appendChild(completeBtn);
+    btns.appendChild(removeBtn);
+
+    li.appendChild(info);
+    li.appendChild(btns);
+    return li;
+  }
+
+  function renderTask(task) {
+    taskList.appendChild(createTaskLI(task));
+  }
+
+  function renderAll() {
+    taskList.innerHTML = '';
+    tasks.forEach(renderTask);
+  }
+
+  
+  function handleSubmit(e) {
+    e.preventDefault(); 
+
+    const title = titleEl.value.trim();
+    const priority = priorityEl.value;
+    const status = (document.querySelector('input[name="taskStatus"]:checked') || {}).value || 'pending';
+    if (!title) {
+      titleEl.focus();
+      return;
+    }
+
+    const task = { id: genId(), title, priority, status };
+    tasks.push(task);     
+    renderTask(task);     
+    save();               
+
+    form.reset();
+    document.getElementById('statusPending').checked = true; 
+    titleEl.focus();
+  }
+
+  function handleListClick(e) {
+    const action = e.target.dataset.action;
+    if (!action) return;
+
+    const li = e.target.closest('li.list-group-item');
+    if (!li) return;
+
+    const id = li.dataset.id;
+    const idx = tasks.findIndex(t => t.id === id);
+    if (idx === -1) return;
+
+    if (action === 'remove') {
+      
+      tasks.splice(idx, 1);
+      li.remove();
+      save();
+    } else if (action === 'complete') {
+
+      tasks[idx].status = 'completed';
+      
+      const titleSpan = li.querySelector('span:not(.badge)');
+      const statusSmall = li.querySelector('small.text-muted');
+      if (titleSpan) titleSpan.classList.add('completed');
+      if (statusSmall) statusSmall.textContent = 'Status: completed';
+      save();
+    }
+  }
+
+  
+  tasks = load();   
+  renderAll();      
+
+  form.addEventListener('submit', handleSubmit); 
+  taskList.addEventListener('click', handleListClick); 
+});
