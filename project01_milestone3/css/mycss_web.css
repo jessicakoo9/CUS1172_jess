@@ -1,1 +1,81 @@
+body {
+  background-color: white;
+  padding: 20px;
+  font-size: 18px;
+}
 
+h1 {
+  font-size: 32px;
+  color: #e889b0;
+  margin-top: 30px;
+  text-align: center;
+  font-family: Georgia, serif;
+}
+
+img {
+  width: 300px;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+video {
+  width: 80%;
+  display: block;
+  margin: 15px auto;
+  border-radius: 8px;
+}
+
+.navbar-brand {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.nav-link {
+  font-size: 17px;
+  padding: 10px 15px;
+}
+
+p, li {
+  font-size: 17px;
+  line-height: 1.6;
+}
+
+table {
+  width: 100%;
+  font-size: 17px;
+}
+
+.table th,
+.table td {
+  padding: 12px;
+}
+
+.list-group-item {
+  padding: 14px 18px;
+  font-size: 17px;
+}
+
+.card {
+  margin-top: 20px;
+  border-radius: 10px;
+}
+
+.card-body {
+  padding: 20px;
+}
+
+form {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+button,
+.btn {
+  font-size: 17px;
+  padding: 10px 16px;
+}
+
+.container {
+  max-width: 1000px;
+}
